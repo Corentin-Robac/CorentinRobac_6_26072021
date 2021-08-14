@@ -3,12 +3,8 @@ const Thing = require('../models/thing');
 
 exports.createThing = (req, res, next) => {
   const thing = new Thing({
-    title: req.body.title,
-    description: req.body.description,
-    imageUrl: req.body.imageUrl,
-    price: req.body.price,
-    userId: req.body.userId
-  });
+    ...req.body
+  });  
   thing.save().then(
     () => {
       res.status(201).json({
@@ -42,12 +38,7 @@ exports.getOneThing = (req, res, next) => {
 
 exports.modifyThing = (req, res, next) => {
   const thing = new Thing({
-    _id: req.params.id,
-    title: req.body.title,
-    description: req.body.description,
-    imageUrl: req.body.imageUrl,
-    price: req.body.price,
-    userId: req.body.userId
+    ...req.body
   });
   Thing.updateOne({_id: req.params.id}, thing).then(
     () => {
