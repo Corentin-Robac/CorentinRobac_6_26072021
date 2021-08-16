@@ -1,9 +1,10 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const app = express();
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const stuffRoutes = require('./routes/stuff');
 const userRoutes = require('./routes/user');
+
+const app = express();
 
 //Lier la bdd
 mongoose.connect('mongodb+srv://Crob:nUEFO09Dlqxpr78S@cluster0.qxjpf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',

@@ -3,21 +3,12 @@ const Thing = require('../models/thing');
 
 exports.createThing = (req, res, next) => {
   const thing = new Thing({
-    ...req.body
+    ...req.body.sauce
   });  
-  thing.save().then(
-    () => {
-      res.status(201).json({
-        message: 'Post saved successfully!'
-      });
-    }
-  ).catch(
-    (error) => {
-      res.status(400).json({
-        error: error
-      });
-    }
-  );
+console.log(thing);
+  thing.save()
+  .then(() => res.status(201).json({message: 'Post saved successfully!'}))
+  .catch((error) => res.status(400).json({error: error}))
 };
 
 exports.getOneThing = (req, res, next) => {
