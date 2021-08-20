@@ -1,22 +1,22 @@
 //Importe le modèle de thing
-const Thing = require('../models/thing');
+const Sauce = require('../models/Sauce');
 
-exports.createThing = (req, res, next) => {
-  const thing = new Thing({
+exports.createSauce = (req, res, next) => {
+  const sauce = new Sauce({
     ...req.body.sauce
   });  
-console.log(thing);
-  thing.save()
+console.log(sauce);
+  sauce.save()
   .then(() => res.status(201).json({message: 'Post saved successfully!'}))
   .catch((error) => res.status(400).json({error: error}))
 };
 
-exports.getOneThing = (req, res, next) => {
-  Thing.findOne({
+exports.getOneSauce = (req, res, next) => {
+  Sauce.findOne({
     _id: req.params.id
   }).then(
-    (thing) => {
-      res.status(200).json(thing);
+    (sauce) => {
+      res.status(200).json(sauce);
     }
   ).catch(
     (error) => {
@@ -27,11 +27,11 @@ exports.getOneThing = (req, res, next) => {
   );
 };
 
-exports.modifyThing = (req, res, next) => {
-  const thing = new Thing({
+exports.modifySauce = (req, res, next) => {
+  const sauce = new Sauce({
     ...req.body
   });
-  Thing.updateOne({_id: req.params.id}, thing).then(
+  Sauce.updateOne({_id: req.params.id}, sauce).then(
     () => {
       res.status(201).json({
         message: 'Thing updated successfully!'
@@ -46,8 +46,8 @@ exports.modifyThing = (req, res, next) => {
   );
 };
 
-exports.deleteThing = (req, res, next) => {
-  Thing.deleteOne({_id: req.params.id}).then(
+exports.deleteSauce = (req, res, next) => {
+  Sauce.deleteOne({_id: req.params.id}).then(
     () => {
       res.status(200).json({
         message: 'Deleted!'
@@ -62,10 +62,10 @@ exports.deleteThing = (req, res, next) => {
   );
 };
 
-exports.getAllStuff = (req, res, next) => {
-  Thing.find().then(
-    (things) => {
-      res.status(200).json(things);
+exports.getAllSauces = (req, res, next) => {
+  Sauce.find().then(
+    (sauce) => {
+      res.status(200).json(sauce);
     }
   ).catch(
     (error) => {
