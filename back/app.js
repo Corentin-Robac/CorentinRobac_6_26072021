@@ -1,10 +1,13 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+//const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+mongoose.set('useCreateIndex', true); //Remplace ensureIndex par createIndex (mise à jour)
 const saucesRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 //Lier la bdd
 mongoose.connect('mongodb+srv://Crob:nUEFO09Dlqxpr78S@cluster0.qxjpf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
@@ -21,7 +24,11 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(bodyParser.json());
+//bodyParser plus utile pour cette version d'express 
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({
+//   extended: true
+// }));
 
 //Utiliser le router
 app.use('/api/sauces', saucesRoutes);
